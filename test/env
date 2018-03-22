@@ -7,8 +7,5 @@ VSTS_TOKEN={PAT}
 # agent pool
 VSTS_POOL={your_pool}
 
-# name of agent
-VSTS_AGENT={any name}
-
 # Any other capabilites
 npm-version=9.8

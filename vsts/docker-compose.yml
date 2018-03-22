@@ -1,9 +1,16 @@
 version: '3'
 services:
-  agent:
+  agent1:
+    build: 
+      context: .
+      dockerfile: java.dockerfile
     image: klilleby/vsts:java-node-9.8
-    env_file: .env
     user: vsts
-    entrypoint: bash
 
+  agent2:
+    build: 
+      context: .
+      dockerfile: node.dockerfile
+    image: klilleby/vsts:node-9.8
+    user: vsts
 
