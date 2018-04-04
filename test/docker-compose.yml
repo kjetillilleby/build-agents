@@ -3,3 +3,6 @@ services:
   vsts:
     image: klilleby/vsts:java-node-9.8
     env_file: agent.env
+    entrypoint: ./start-with-sonar.sh
+    volumes:
+      - ./certs/:/usr/local/share/ca-certificates/
