@@ -1,16 +1,22 @@
 version: '3'
 services:
-  agent1:
+  java:
     build: 
       context: .
       dockerfile: java.dockerfile
     image: klilleby/vsts:java-node-9.8
     user: vsts
 
-  agent2:
+  node:
     build: 
       context: .
       dockerfile: node.dockerfile
     image: klilleby/vsts:node-9.8
     user: vsts
 
+  gcloud:
+    build: 
+      context: .
+      dockerfile: gcloud.dockerfile
+    image: klilleby/vsts:gcloud-node-9.8
+    user: vsts

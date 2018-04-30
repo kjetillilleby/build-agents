@@ -1,9 +1,14 @@
 version: '3'
 services:
-  vsts:
+  v-java:
     image: klilleby/vsts:java-node-9.8
-    env_file: agent.env
+    env_file: java.env
     entrypoint: ./start-with-sonar.sh
     restart: always
     volumes:
       - ./certs/:/usr/local/share/ca-certificates/
+
+  v-gcloud:
+    image: klilleby/vsts:gcloud-node-9.8
+    env_file: gcloud.env
+    restart: always
