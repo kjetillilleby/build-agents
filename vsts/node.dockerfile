@@ -11,9 +11,14 @@ RUN apt-get update -y && apt-get install -y \
     libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
     libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 \
     libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 \
-    libnss3 lsb-release xdg-utils wget \
+    libnss3 lsb-release xdg-utils wget build-essential libssl-dev\
     && rm -rf /var/lib/apt/lists/*
 
 # install node
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
-RUN apt-get install -y nodejs
+ENV NODE_VERSION=v9.11.1
+RUN mkdir /nodejs && curl https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz | tar xvzf - -C /nodejs --strip-components=1
+ENV PATH $PATH:/nodejs/bin
+
+# install npm packages
+RUN npm install -g @angular/cli @nrwl/schematics
+
