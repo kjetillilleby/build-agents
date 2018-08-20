@@ -60,4 +60,21 @@ RUN apt-get update -y && apt-get install -y \
     default-jre \
     && rm -rf /var/lib/apt/lists/*
 
+## install Helm
+ENV HELM_VERSION v2.9.0
+RUN curl -sL "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" -o helm.linux-amd64.tar.gz \
+ && mkdir -p /usr/local/helm \
+ && tar -C /usr/local/helm -xzf helm.linux-amd64.tar.gz --strip-components=1 linux-amd64/helm \
+ && rm helm.linux-amd64.tar.gz
+ENV PATH $PATH:/usr/local/helm
+
+## install Istio (istio.io)
+ENV ISTIO_VERSION 1.0.0
+RUN curl -sL "https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-linux.tar.gz" -o istio.linux-amd64.tar.gz \
+ && mkdir -p /usr/local/istio \
+ && tar -C /usr/local/istio -xzf istio.linux-amd64.tar.gz --strip-components=1 "istio-${ISTIO_VERSION}" \
+ && rm istio.linux-amd64.tar.gz
+ENV PATH $PATH:/usr/local/istio/bin
+
+
 COPY ./start-with-sonar.sh /vsts/
