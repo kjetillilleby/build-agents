@@ -1,22 +1,22 @@
 version: '3'
 services:
   java:
-    build: 
+    build:
       context: .
       dockerfile: java.dockerfile
     image: klilleby/vsts:java-node-9.8
     user: vsts
 
   node:
-    build: 
+    build:
       context: .
       dockerfile: node.dockerfile
-    image: klilleby/vsts:node-9.8
+    image: klilleby/vsts:node-10.5
     user: vsts
 
   gcloud:
-    build: 
+    build:
       context: .
       dockerfile: gcloud.dockerfile
-    image: klilleby/vsts:gcloud-node-9.8
+    image: klilleby/vsts:gcloud-node-10.5
     user: vsts
