@@ -9,6 +9,6 @@ services:
       - ./certs/:/usr/local/share/ca-certificates/
 
   v-gcloud:
-    image: klilleby/vsts:gcloud-node-9.8
+    image: klilleby/vsts:gcloud-node-10.5
     env_file: gcloud.env
     restart: always
