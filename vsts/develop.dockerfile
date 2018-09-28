@@ -47,6 +47,11 @@ RUN curl -sL "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" -o go
 ENV GOROOT=/usr/local/go
 ENV PATH $PATH:$GOROOT/bin
 
+# Install Go Dep
+ENV GO_DEP v0.5.0
+RUN curl -sL "https://github.com/golang/dep/releases/download/${GO_DEP}/dep-linux-amd64" -o /usr/local/go/bin/dep \
+    && chmod +x /usr/local/go/bin/dep
+
 ## install gcloud with kubectl
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
@@ -61,7 +66,7 @@ RUN apt-get update -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## install Helm
-ENV HELM_VERSION v2.9.0
+ENV HELM_VERSION v2.10.0
 RUN curl -sL "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" -o helm.linux-amd64.tar.gz \
  && mkdir -p /usr/local/helm \
  && tar -C /usr/local/helm -xzf helm.linux-amd64.tar.gz --strip-components=1 linux-amd64/helm \
@@ -69,7 +74,7 @@ RUN curl -sL "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION
 ENV PATH $PATH:/usr/local/helm
 
 ## install Istio (istio.io)
-ENV ISTIO_VERSION 1.0.0
+ENV ISTIO_VERSION 1.0.2
 RUN curl -sL "https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-linux.tar.gz" -o istio.linux-amd64.tar.gz \
  && mkdir -p /usr/local/istio \
  && tar -C /usr/local/istio -xzf istio.linux-amd64.tar.gz --strip-components=1 "istio-${ISTIO_VERSION}" \

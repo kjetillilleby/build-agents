@@ -1,7 +1,7 @@
 version: '3'
 services:
   v-java:
-    image: klilleby/vsts:java-node-9.8
+    image: klilleby/vsts:scan
     env_file: java.env
     entrypoint: ./start-with-sonar.sh
     restart: always
