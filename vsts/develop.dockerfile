@@ -15,7 +15,7 @@ RUN apt-get update -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # install node
-ENV NODE_VERSION=v10.5.0
+ENV NODE_VERSION=v10.15.0
 RUN mkdir /nodejs && curl https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz | tar xvzf - -C /nodejs --strip-components=1
 ENV PATH $PATH:/nodejs/bin
 
@@ -23,7 +23,7 @@ ENV PATH $PATH:/nodejs/bin
 RUN npm install -g @angular/cli @nrwl/schematics
 
 ENV DOCKER_CHANNEL stable
-ENV DOCKER_VERSION 18.03.1-ce
+ENV DOCKER_VERSION 18.09.0
 
 RUN set -ex \
  && curl -fL "https://download.docker.com/linux/static/${DOCKER_CHANNEL}/`uname -m`/docker-${DOCKER_VERSION}.tgz" -o docker.tgz \
@@ -31,7 +31,7 @@ RUN set -ex \
  && rm docker.tgz \
  && docker -v
 
-ENV DOCKER_COMPOSE_VERSION 1.22.0-rc1
+ENV DOCKER_COMPOSE_VERSION 1.23.2
 
 RUN set -x \
  && curl -fSL "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m`" -o /usr/local/bin/docker-compose \
@@ -39,7 +39,7 @@ RUN set -x \
  && docker-compose -v
 
 # Install Go
-ENV GO_VERSION 1.10.3
+ENV GO_VERSION 1.11.4
 RUN curl -sL "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" -o go.linux-amd64.tar.gz \
  && mkdir -p /usr/local/go \
  && tar -C /usr/local/go -xzf go.linux-amd64.tar.gz --strip-components=1 go \
@@ -66,7 +66,7 @@ RUN apt-get update -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## install Helm
-ENV HELM_VERSION v2.10.0
+ENV HELM_VERSION v2.12.1
 RUN curl -sL "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" -o helm.linux-amd64.tar.gz \
  && mkdir -p /usr/local/helm \
  && tar -C /usr/local/helm -xzf helm.linux-amd64.tar.gz --strip-components=1 linux-amd64/helm \
@@ -74,7 +74,7 @@ RUN curl -sL "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION
 ENV PATH $PATH:/usr/local/helm
 
 ## install Istio (istio.io)
-ENV ISTIO_VERSION 1.0.2
+ENV ISTIO_VERSION 1.0.5
 RUN curl -sL "https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-linux.tar.gz" -o istio.linux-amd64.tar.gz \
  && mkdir -p /usr/local/istio \
  && tar -C /usr/local/istio -xzf istio.linux-amd64.tar.gz --strip-components=1 "istio-${ISTIO_VERSION}" \
