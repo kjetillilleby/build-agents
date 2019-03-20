@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install -y \
     libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
     libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 \
     libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 \
-    libnss3 lsb-release xdg-utils wget build-essential libssl-dev python\
+    libnss3 lsb-release xdg-utils wget build-essential libssl-dev python \
     && rm -rf /var/lib/apt/lists/*
 
 # install node
@@ -39,7 +39,7 @@ RUN set -x \
  && docker-compose -v
 
 # Install Go
-ENV GO_VERSION 1.11.4
+ENV GO_VERSION 1.12.1
 RUN curl -sL "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" -o go.linux-amd64.tar.gz \
  && mkdir -p /usr/local/go \
  && tar -C /usr/local/go -xzf go.linux-amd64.tar.gz --strip-components=1 go \
@@ -66,7 +66,7 @@ RUN apt-get update -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## install Helm
-ENV HELM_VERSION v2.12.1
+ENV HELM_VERSION v2.13.0
 RUN curl -sL "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" -o helm.linux-amd64.tar.gz \
  && mkdir -p /usr/local/helm \
  && tar -C /usr/local/helm -xzf helm.linux-amd64.tar.gz --strip-components=1 linux-amd64/helm \
@@ -81,5 +81,9 @@ RUN curl -sL "https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/
  && rm istio.linux-amd64.tar.gz
 ENV PATH $PATH:/usr/local/istio/bin
 
+## install powershell
+RUN wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb
+RUN apt-get update -y && apt-get install -y powershell \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY ./start-with-sonar.sh /vsts/

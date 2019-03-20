@@ -1,7 +1,7 @@
 #docker build -t v-develop -f develop.dockerfile .
-#docker tag v-develop klilleby/vsts-develop:1.4
+#docker tag v-develop klilleby/vsts-develop:1.5
 #docker tag v-develop klilleby/vsts-develop:latest
-docker push klilleby/vsts-develop:1.4
+docker push klilleby/vsts-develop:1.5
 docker push klilleby/vsts-develop:latest
 
 # docker build -t v-node -f node.dockerfile .
